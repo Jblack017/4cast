@@ -8,6 +8,7 @@ import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
+import csv from 'csv'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -24,15 +25,76 @@ const useStyles = makeStyles(theme => ({
   button: { margin: theme.spacing(3) },
 }));
 
-const StockCasts = () => {
+const StockCast = () => {
   const intl = useIntl();
   const classes = useStyles();
   const [stockSymbol, setStockSymbol] = useState("");
+  const [ xAxis, setXAxis ] = useState(null)
+  const [ projectionLower, setProjectionLower ] = useState(null)
+  const [ projection, setProjection ] = useState(null)
+  const [ projectionUpper, setProjectionUpper ] = useState(null)
 
   const handleSubmit = event => {
     event.preventDefault();
-    console.log(stockSymbol);
+    fetchStockData()
   };
+
+  const parseStockObj = (stockObj) => {
+    let stockData = [["Date", "Open"]];
+
+    for (let property in stockObj) {
+      const record = [property, parseFloat(stockObj[property]["1. open"])]
+      stockData.push(record)
+    }
+   return stockData
+  }
+
+  const fetchFourCast = (stockData) => {
+    fetch('https://four-cast-app.herokuapp.com/', {
+        method: 'POST',
+        headrs: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({"data": stockData})
+      })
+        .then(response => response.json())
+        .then(forecast => parseForecast(forecast))
+  }
+
+  const parseForecast = (forecast) => {
+    csv.parse(forecast.data, (err, data) => {
+      console.log(data)
+      if(!err) { 
+        let xAxisValues = []
+        let projLower = []
+        let projected = []
+        let projUpper = []
+        data.shift()
+        data.forEach(row => {
+          if(row){
+            xAxisValues.push(row[1])
+            projected.push(parseFloat(row[2]).toFixed(2))
+            projLower.push(parseFloat(row[3]).toFixed(2))
+            projUpper.push(parseFloat(row[4]).toFixed(2))
+          }
+        })
+        setXAxis(xAxisValues)
+        setProjection(projected)  
+        setProjectionLower(projLower)
+        setProjectionUpper(projUpper)
+      } else {
+        console.error(err)
+      }
+    }) 
+  }
+
+  const fetchStockData = () => {
+    fetch('https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&outputsize=full&apikey=demo')
+    .then(response => response.json())
+    .then(stockObj => parseStockObj(stockObj["Time Series (Daily)"]))
+    .then(stockData => fetchFourCast(stockData))
+  }
+
 
   return (
     <Page
@@ -82,4 +144,4 @@ const StockCasts = () => {
     </Page>
   );
 };
-export default StockCasts;
+export default StockCast;
