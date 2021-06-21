@@ -37,7 +37,7 @@ const messages = defineMessages({
   forgot_password:'Forgot password',
   password_reset:'Password reset',
   password_confirm:'Password confirm',
-  registration:'Registration',
+  registration:'Sign-Up',
   my_account: 'My account',
   delete_account_dialog_title: 'Delete Account?',
   delete_account_dialog_message:

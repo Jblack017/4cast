@@ -10,6 +10,8 @@ import { useAuth } from 'base-shell/lib/providers/Auth'
 import { useHistory } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import { useMenu } from 'material-ui-shell/lib/providers/Menu'
+import logo from './logo_300x250.png'
+
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -85,6 +87,7 @@ const SignIn = () => {
   return (
     <Page pageTitle={intl.formatMessage({ id: 'sign_in' })}>
       <Paper className={classes.paper} elevation={6}>
+      <img alt="logo" src={logo} />
         <div className={classes.container}>
           <Typography component="h1" variant="h5">
             {intl.formatMessage({ id: 'sign_in' })}
