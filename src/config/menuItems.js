@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import {
   AccountBox as AccountBoxIcon,
   ChatBubble,
@@ -19,12 +19,13 @@ import {
   Tab,
   ViewList,
   Web,
-} from '@material-ui/icons'
+} from "@material-ui/icons";
 
-import allLocales from './locales'
-import allThemes from './themes'
+import allLocales from "./locales";
+import allThemes from "./themes";
+import castIcon from "./icon.png";
 
-const getMenuItems = (props) => {
+const getMenuItems = props => {
   const {
     intl,
     updateLocale,
@@ -33,150 +34,146 @@ const getMenuItems = (props) => {
     themeContext,
     a2HSContext,
     auth: authData,
-  } = props
+  } = props;
 
-  const {
-    toggleThis,
-    isDesktop,
-    isAuthMenuOpen,
-    isMiniSwitchVisibility,
-  } = menuContext
-  const { themeID, setThemeID, isRTL, toggleThisTheme } = themeContext
+  const { toggleThis, isDesktop, isAuthMenuOpen, isMiniSwitchVisibility } =
+    menuContext;
+  const { themeID, setThemeID, isRTL, toggleThisTheme } = themeContext;
 
-  const { auth, setAuth } = authData
-  const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext
+  const { auth, setAuth } = authData;
+  const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext;
 
-  const localeItems = allLocales.map((l) => {
+  const localeItems = allLocales.map(l => {
     return {
       value: undefined,
       visible: true,
       primaryText: intl.formatMessage({ id: l.locale }),
       onClick: () => {
-        updateLocale(l.locale)
+        updateLocale(l.locale);
       },
       leftIcon: <LanguageIcon />,
-    }
-  })
+    };
+  });
 
-  const isAuthorised = auth.isAuthenticated
+  const isAuthorised = auth.isAuthenticated;
 
-  const themeItems = allThemes.map((t) => {
+  const themeItems = allThemes.map(t => {
     return {
       value: undefined,
       visible: true,
       primaryText: intl.formatMessage({ id: t.id }),
       onClick: () => {
-        setThemeID(t.id)
+        setThemeID(t.id);
       },
       leftIcon: <StyleIcon style={{ color: t.color }} />,
-    }
-  })
+    };
+  });
 
   if (isAuthMenuOpen || !isAuthorised) {
     return [
       {
-        value: '/my_account',
+        value: "/my_account",
         primaryText: intl.formatMessage({
-          id: 'my_account',
-          defaultMessage: 'My Account',
+          id: "my_account",
+          defaultMessage: "My Account",
         }),
         leftIcon: <AccountBoxIcon />,
       },
       {
-        value: '/signin',
+        value: "/signin",
         onClick: isAuthorised
           ? () => {
-              setAuth({ isAuthenticated: false })
+              setAuth({ isAuthenticated: false });
             }
           : () => {},
         visible: true,
         primaryText: isAuthorised
-          ? intl.formatMessage({ id: 'sign_out' })
-          : intl.formatMessage({ id: 'sign_in' }),
+          ? intl.formatMessage({ id: "sign_out" })
+          : intl.formatMessage({ id: "sign_in" }),
         leftIcon: isAuthorised ? <ExitToAppIcon /> : <LockIcon />,
       },
-    ]
+    ];
   }
   return [
     {
-      value: '/home',
+      value: "/home",
       visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: 'home' }),
+      primaryText: intl.formatMessage({ id: "home" }),
       leftIcon: <DashboardIcon />,
     },
     {
-      primaryText: intl.formatMessage({ id: 'demos', defaultMessage: 'Demos' }),
+      primaryText: "Create New",
       primaryTogglesNestedList: true,
       leftIcon: <Web />,
       nestedItems: [
         {
-          value: '/dialog_demo',
+          value: "/stock_cast",
           visible: isAuthorised,
           primaryText: intl.formatMessage({
-            id: 'dialog_demo',
-            defaultMessage: 'Dialog',
+            id: "stock_cast",
+            defaultMessage: "Stock Cast",
           }),
-          leftIcon: <ChatBubble />,
+          leftIcon: <img alt='cast icon' src={castIcon}></img>,
         },
-        {
-          value: '/toast_demo',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'toast_demo',
-            defaultMessage: 'Toast',
-          }),
-          leftIcon: <QuestionAnswer />,
-        },
-        {
-          value: '/filter_demo',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'filter_demo',
-            defaultMessage: 'Filter',
-          }),
-          leftIcon: <FilterList />,
-        },
-        {
-          value: '/list_page_demo',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'list_page_demo_menu',
-            defaultMessage: 'List Page',
-          }),
-          leftIcon: <ViewList />,
-        },
-        {
-          value: '/tabs_demo',
-          visible: isAuthorised,
-          primaryText: intl.formatMessage({
-            id: 'tabs_demo',
-            defaultMessage: 'Tabs Page',
-          }),
-          leftIcon: <Tab />,
-        },
+        // {
+        //   value: "/toast_demo",
+        //   visible: isAuthorised,
+        //   primaryText: intl.formatMessage({
+        //     id: "toast_demo",
+        //     defaultMessage: "Toast",
+        //   }),
+        //   leftIcon: <QuestionAnswer />,
+        // },
+        // {
+        //   value: "/filter_demo",
+        //   visible: isAuthorised,
+        //   primaryText: intl.formatMessage({
+        //     id: "filter_demo",
+        //     defaultMessage: "Filter",
+        //   }),
+        //   leftIcon: <FilterList />,
+        // },
+        // {
+        //   value: "/list_page_demo",
+        //   visible: isAuthorised,
+        //   primaryText: intl.formatMessage({
+        //     id: "list_page_demo_menu",
+        //     defaultMessage: "List Page",
+        //   }),
+        //   leftIcon: <ViewList />,
+        // },
+        // {
+        //   value: "/tabs_demo",
+        //   visible: isAuthorised,
+        //   primaryText: intl.formatMessage({
+        //     id: "tabs_demo",
+        //     defaultMessage: "Tabs Page",
+        //   }),
+        //   leftIcon: <Tab />,
+        // },
       ],
     },
     {
-      value: '/about',
+      value: "/about",
       visible: true,
-      primaryText: intl.formatMessage({ id: 'about' }),
+      primaryText: intl.formatMessage({ id: "about" }),
       leftIcon: <InfoOutlined />,
     },
     { divider: true },
     {
-      primaryText: intl.formatMessage({ id: 'settings' }),
+      primaryText: intl.formatMessage({ id: "settings" }),
       primaryTogglesNestedList: true,
       leftIcon: <SettingsIcon />,
       nestedItems: [
         {
-          primaryText: intl.formatMessage({ id: 'theme' }),
+          primaryText: intl.formatMessage({ id: "theme" }),
           secondaryText: intl.formatMessage({ id: themeID }),
           primaryTogglesNestedList: true,
           leftIcon: <StyleIcon />,
           nestedItems: themeItems,
         },
         {
-          primaryText: intl.formatMessage({ id: 'language' }),
+          primaryText: intl.formatMessage({ id: "language" }),
           secondaryText: intl.formatMessage({ id: locale }),
           primaryTogglesNestedList: true,
           leftIcon: <LanguageIcon />,
@@ -185,10 +182,10 @@ const getMenuItems = (props) => {
         {
           visible: isDesktop ? true : false,
           onClick: () => {
-            toggleThis('isMiniSwitchVisibility')
+            toggleThis("isMiniSwitchVisibility");
           },
           primaryText: intl.formatMessage({
-            id: 'menu_mini_mode',
+            id: "menu_mini_mode",
           }),
           leftIcon: isMiniSwitchVisibility ? (
             <MenuOpenIcon />
@@ -198,9 +195,9 @@ const getMenuItems = (props) => {
         },
         {
           onClick: () => {
-            toggleThisTheme('isRTL')
+            toggleThisTheme("isRTL");
           },
-          primaryText: `${isRTL ? 'LTR' : 'RTL'} mode`,
+          primaryText: `${isRTL ? "LTR" : "RTL"} mode`,
           leftIcon: isRTL ? <LTRIcon /> : <RTLIcon />,
         },
       ],
@@ -209,14 +206,14 @@ const getMenuItems = (props) => {
       value: null,
       visible: isAppInstallable && !isAppInstalled,
       onClick: () => {
-        deferredPrompt.prompt()
+        deferredPrompt.prompt();
       },
       primaryText: intl.formatMessage({
-        id: 'install',
-        defaultMessage: 'Install',
+        id: "install",
+        defaultMessage: "Install",
       }),
       leftIcon: <GetApp />,
     },
-  ]
-}
-export default getMenuItems
+  ];
+};
+export default getMenuItems;

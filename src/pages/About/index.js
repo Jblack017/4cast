@@ -1,42 +1,23 @@
-import React, { useEffect, useState } from 'react'
-import { useIntl } from 'react-intl'
-import Page from 'material-ui-shell/lib/containers/Page'
-import Scrollbar from 'material-ui-shell/lib/components/Scrollbar'
-import ReactMarkdown from 'react-markdown'
-import 'github-markdown-css'
+import React from "react";
+import { useIntl } from "react-intl";
+import Page from "material-ui-shell/lib/containers/Page";
+import Scrollbar from "material-ui-shell/lib/components/Scrollbar";
 
 const About = () => {
-  const [source, setSource] = useState(null)
-  const intl = useIntl()
-
-  const loadData = async () => {
-    const data = await fetch(
-      'https://raw.githubusercontent.com/TarikHuber/react-most-wanted/master/README.md'
-    )
-    const text = await data.text()
-    setSource(text)
-  }
-
-  useEffect(() => {
-    loadData()
-  }, [])
+  const intl = useIntl();
 
   return (
     <Page
-      pageTitle={intl.formatMessage({ id: 'about', defaultMessage: 'About' })}
+      pageTitle={intl.formatMessage({ id: "about", defaultMessage: "About" })}
     >
       <Scrollbar>
-        <div style={{ backgroundColor: 'white', padding: 12 }}>
-          {source && (
-            <ReactMarkdown
-              className="markdown-body"
-              source={source}
-              escapeHtml
-            />
-          )}
-        </div>
+        <p>
+          Are you counting widgets, fidgets, rocks, socks, or stocks over time?
+          Or, any value tracked over time? Then 4Cast is the place to go look at
+          what the future might bring.
+        </p>
       </Scrollbar>
     </Page>
-  )
-}
-export default About
+  );
+};
+export default About;
