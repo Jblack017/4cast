@@ -10,35 +10,46 @@ const TabsDemo = () => {
   const [tab, setTab] = useState("one");
   const intl = useIntl();
 
-  const [userProjects, setUserProjects] = useState([]);
+  const [userProjects, setUserProjects] = useState({});
 
   useEffect(() => {
-    fetch("http://127.0.0.1:3000/graphs/")
+    fetch("http://127.0.0.1:3000/projects/5")
       .then(response => response.json())
-      .then(userProjects => setUserProjects(userProjects));
+      .then(userProjects => setUserProjects(userProjects))
+      .then(renderProjectTabs());
   }, []);
 
-  const renderUserPlotly = () => {
-    return userProjects.map(graph => {
-      let xAxis = graph["x_axis_array"].split(",");
-      let projectionLower = graph["proj_low_array"].split(",");
-      let projection = graph["proj_array"].split(",");
-      let projectionUpper = graph["proj_high_array"].split(",");
-      let stockSym = graph["stock_sym"];
+  const renderProjectTabGraphs = () => {
+    let graphs = userProjects["graphs"];
+    console.log(graphs);
+    if (graphs) {
+      return graphs.map(graph => {
+        let xAxis = graph["x_axis_array"].split(",");
+        let projectionLower = graph["proj_low_array"].split(",");
+        let projection = graph["proj_array"].split(",");
+        let projectionUpper = graph["proj_high_array"].split(",");
+        let stockSym = graph["stock_sym"];
 
-      return (
-        <UserPlotly
-          xAxis={xAxis}
-          projectionLower={projectionLower}
-          projection={projection}
-          projectionUpper={projectionUpper}
-          stockSym={stockSym}
-        />
-      );
-    });
+        return (
+          <UserPlotly
+            xAxis={xAxis}
+            projectionLower={projectionLower}
+            projection={projection}
+            projectionUpper={projectionUpper}
+            stockSym={stockSym}
+          />
+        );
+      });
+    }
   };
 
   const renderProjectTabs = () => {
+    if (Object.keys(userProjects)) {
+      Object.values(userProjects).map(proj => {
+        return <Tab label={proj["name"]} value={proj["name"]} />;
+      });
+    }
+
     return (
       <Tabs
         value={tab}
@@ -64,7 +75,7 @@ const TabsDemo = () => {
       {" "}
       {renderProjectTabs()}
       <div>
-        {tab === "one" && renderUserPlotly()}
+        {tab === "one" && renderProjectTabGraphs()}
         {tab === "two" && <div>Two</div>}
         {tab === "three" && <div>Three</div>}
       </div>

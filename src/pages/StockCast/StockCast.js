@@ -113,6 +113,7 @@ const StockCast = () => {
 
   const handleSave = () => {
     let stockObject = {
+      project: "5",
       stock_sym: stockSymbol.toString().toUpperCase(),
       x_axis_array: xAxis.toString(),
       proj_low_array: projectionLower.toString(),
