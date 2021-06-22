@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
 const StockCast = () => {
   const intl = useIntl();
   const classes = useStyles();
-  const [stockSymbol, setStockSymbol] = useState("");
+  const [stockSymbol, setStockSymbol] = useState("TSLA");
   const [xAxis, setXAxis] = useState(null);
   const [projectionLower, setProjectionLower] = useState(null);
   const [projection, setProjection] = useState(null);
@@ -43,7 +43,7 @@ const StockCast = () => {
     event.preventDefault();
     fetchStockData();
   };
-  // https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&outputsize=full&apikey=demo
+
   const fetchStockData = () => {
     console.log();
     fetch(baseURL + intraDayTS + stockSymbol + outputSize + apiKey)
@@ -65,7 +65,7 @@ const StockCast = () => {
 
   const fetchFourCast = stockData => {
     const stockObject = { data: stockData };
-    fetch("https://four-cast-app.herokuapp.com/", {
+    fetch("http://127.0.0.1:5000/", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -103,6 +103,18 @@ const StockCast = () => {
     });
   };
 
+  const handleReset = () => {
+    setStockSymbol("TSLA");
+    setXAxis(null);
+    setProjectionLower(null);
+    setProjection(null);
+    setProjectionUpper(null);
+  }
+
+  const handleSave = () => {
+    console.log("fetch to rails be")
+  }
+
   return (
     <Page
       pageTitle={intl.formatMessage({
@@ -112,6 +124,8 @@ const StockCast = () => {
     >
       <Scrollbar className={classes.scrollbar}>
         <Grid container spacing={1} className={classes.grid}>
+        {!xAxis ? (
+          <>
           <Grid item xs={4} sm={4}>
             <form
               className={classes.textField}
@@ -141,6 +155,34 @@ const StockCast = () => {
               Cast
             </Button>
           </Grid>
+          </>
+        ) : (
+          <>
+          <Grid item xs={4} sm={4}>
+            <Button
+              className={classes.button}
+              size='large'
+              variant='contained'
+              color='primary'
+              onClick={handleSave}
+            >
+              Save to Project
+            </Button>
+          </Grid>
+          <Grid item xs={8} sm={8}>
+            <Button
+              className={classes.button}
+              size='large'
+              variant='contained'
+              color='secondary'
+              onClick={handleReset}
+            >
+              Reset and Search Again
+            </Button>
+            </Grid>
+          </>
+        )}
+          
           <Grid item xs={12} sm={12}>
             <Paper className={classes.paper}>
               {xAxis ? (
@@ -151,7 +193,7 @@ const StockCast = () => {
                   projectionUpper={projectionUpper}
                 />
               ) : (
-                "hwathlaktjltkhwleth"
+                "Search a ticker symbol above"
               )}
             </Paper>
           </Grid>
