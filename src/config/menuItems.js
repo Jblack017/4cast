@@ -102,6 +102,15 @@ const getMenuItems = props => {
       leftIcon: <DashboardIcon />,
     },
     {
+      value: "/projects",
+      visible: isAuthorised,
+      primaryText: intl.formatMessage({
+        id: "projects",
+        defaultMessage: "4Casts",
+      }),
+      leftIcon: <Tab />,
+    },
+    {
       primaryText: "Create New",
       primaryTogglesNestedList: true,
       leftIcon: <Web />,
@@ -141,15 +150,6 @@ const getMenuItems = props => {
         //     defaultMessage: "List Page",
         //   }),
         //   leftIcon: <ViewList />,
-        // },
-        // {
-        //   value: "/tabs_demo",
-        //   visible: isAuthorised,
-        //   primaryText: intl.formatMessage({
-        //     id: "tabs_demo",
-        //     defaultMessage: "Tabs Page",
-        //   }),
-        //   leftIcon: <Tab />,
         // },
       ],
     },
