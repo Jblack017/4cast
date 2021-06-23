@@ -6,7 +6,6 @@ import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
 import UserPlotly from "graphs/UserPlotly";
 import Paper from "@material-ui/core/Paper";
 import Grid from "@material-ui/core/Grid";
-import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import csv from "csv";
 import { useDropzone } from "react-dropzone";
@@ -82,7 +81,7 @@ const CsvCast = () => {
           })
           .catch(promiseError => console.error(promiseError));
       };
-
+      setFileName(acceptedFile[0].name.split(".")[0]);
       reader.readAsText(acceptedFile[0]);
       reader.onload = () => {
         csv.parse(reader.result, (err, data) => {
@@ -102,7 +101,7 @@ const CsvCast = () => {
   const handleSave = () => {
     let stockObject = {
       project: "5",
-      // stock_sym: stockSymbol.toString().toUpperCase(),
+      stock_sym: fileName.toString().toUpperCase(),
       x_axis_array: xAxis.toString(),
       proj_low_array: projectionLower.toString(),
       proj_high_array: projection.toString(),

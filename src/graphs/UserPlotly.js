@@ -29,7 +29,7 @@ export default function UserPlotly({
   const classes = useStyles();
 
   return (
-    <Paper variant='outlined' elevation={4}>
+    <Paper className={classes.paper} variant='outlined' elevation={4}>
       <Card>
         <CardActionArea>
           <Plot
