@@ -78,54 +78,62 @@ export default function UserPlotly({
             style={{ width: "100%", height: "100%", display: "flex", flex: 1 }}
           />
           <CardContent>
-            <Grid container spacing={2}>
-              <Grid item xs={6} sm={3}>
-                {" "}
-                <strong>Open: </strong>{" "}
-                {parseFloat(globalQuote["Global Quote"]["02. open"]).toFixed(2)}
+            {globalQuote["Global Quote"] ? (
+              <Grid container spacing={2}>
+                <Grid item xs={6} sm={3}>
+                  {" "}
+                  <strong>Open: </strong>{" "}
+                  {parseFloat(globalQuote["Global Quote"]["02. open"]).toFixed(
+                    2
+                  )}
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  {" "}
+                  <strong>High: </strong>
+                  {parseFloat(globalQuote["Global Quote"]["03. high"]).toFixed(
+                    2
+                  )}
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  {" "}
+                  <strong>Low: </strong>
+                  {parseFloat(globalQuote["Global Quote"]["04. low"]).toFixed(
+                    2
+                  )}
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  {" "}
+                  <strong>Price: </strong>{" "}
+                  {parseFloat(globalQuote["Global Quote"]["05. price"]).toFixed(
+                    2
+                  )}
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  {" "}
+                  <strong>Volume: </strong>
+                  {globalQuote["Global Quote"]["06. volume"]}
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  {" "}
+                  <strong>Previous Close: </strong>
+                  {parseFloat(
+                    globalQuote["Global Quote"]["08. previous close"]
+                  ).toFixed(2)}
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  {" "}
+                  <strong>Change $: </strong>{" "}
+                  {parseFloat(
+                    globalQuote["Global Quote"]["09. change"]
+                  ).toFixed(2)}
+                </Grid>
+                <Grid item xs={6} sm={3}>
+                  {" "}
+                  <strong>Change %: </strong>
+                  {globalQuote["Global Quote"]["10. change percent"]}
+                </Grid>
               </Grid>
-              <Grid item xs={6} sm={3}>
-                {" "}
-                <strong>High: </strong>
-                {parseFloat(globalQuote["Global Quote"]["03. high"]).toFixed(2)}
-              </Grid>
-              <Grid item xs={6} sm={3}>
-                {" "}
-                <strong>Low: </strong>
-                {parseFloat(globalQuote["Global Quote"]["04. low"]).toFixed(2)}
-              </Grid>
-              <Grid item xs={6} sm={3}>
-                {" "}
-                <strong>Price: </strong>{" "}
-                {parseFloat(globalQuote["Global Quote"]["05. price"]).toFixed(
-                  2
-                )}
-              </Grid>
-              <Grid item xs={6} sm={3}>
-                {" "}
-                <strong>Volume: </strong>
-                {globalQuote["Global Quote"]["06. volume"]}
-              </Grid>
-              <Grid item xs={6} sm={3}>
-                {" "}
-                <strong>Previous Close: </strong>
-                {parseFloat(
-                  globalQuote["Global Quote"]["08. previous close"]
-                ).toFixed(2)}
-              </Grid>
-              <Grid item xs={6} sm={3}>
-                {" "}
-                <strong>Change $: </strong>{" "}
-                {parseFloat(globalQuote["Global Quote"]["09. change"]).toFixed(
-                  2
-                )}
-              </Grid>
-              <Grid item xs={6} sm={3}>
-                {" "}
-                <strong>Change %: </strong>
-                {globalQuote["Global Quote"]["10. change percent"]}
-              </Grid>
-            </Grid>
+            ) : null}
           </CardContent>
         </CardActionArea>
       </Card>

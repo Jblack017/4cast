@@ -19,7 +19,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.main,
+    fontSize: "2em",
   },
   scrollbar: { height: "70%", width: "70%", display: "flex", flex: 1 },
   textField: { margin: theme.spacing(3) },
@@ -116,6 +117,7 @@ const StockCast = () => {
         setLoading(false);
       } else {
         console.error(err);
+        setLoading(false);
       }
     });
   };
@@ -192,6 +194,17 @@ const StockCast = () => {
             </>
           ) : (
             <>
+              <Grid item xs={2} sm={2}>
+                <Button
+                  className={classes.button}
+                  size='large'
+                  variant='contained'
+                  color='secondary'
+                  onClick={() => window.location.reload()}
+                >
+                  Reset
+                </Button>
+              </Grid>
               <Grid item xs={4} sm={4}>
                 <Button
                   className={classes.button}
@@ -201,17 +214,6 @@ const StockCast = () => {
                   onClick={handleSave}
                 >
                   Save to Project
-                </Button>
-              </Grid>
-              <Grid item xs={8} sm={8}>
-                <Button
-                  className={classes.button}
-                  size='large'
-                  variant='contained'
-                  color='secondary'
-                  onClick={() => window.location.reload()}
-                >
-                  Reset and Search Again
                 </Button>
               </Grid>
             </>
