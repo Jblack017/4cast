@@ -36,9 +36,7 @@ const StockCast = () => {
   const [projectionUpper, setProjectionUpper] = useState(null);
   const [loading, setLoading] = useState(false);
   const [globalQuote, setGlobalQuote] = useState({});
-  const [loadingMessage, setLoadingMessage] = useState(
-    "Search a ticker symbol above"
-  );
+  const [loadingMessage, setLoadingMessage] = useState("Drag and Drop a CSV");
 
   const baseURL = "https://www.alphavantage.co/query?";
   const intraDayTS = "function=TIME_SERIES_DAILY_ADJUSTED&symbol=";
@@ -161,7 +159,7 @@ const StockCast = () => {
           {!xAxis ? (
             <>
               <Grid item xs={4} sm={4}>
-                <form
+                {/* <form
                   className={classes.textField}
                   noValidate
                   autoComplete='off'
@@ -187,7 +185,7 @@ const StockCast = () => {
                   onClick={handleSubmit}
                 >
                   Cast
-                </Button>
+                </Button> */}
               </Grid>
             </>
           ) : (

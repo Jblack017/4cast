@@ -7,60 +7,63 @@ import { useIntl } from "react-intl";
 import UserPlotly from "graphs/UserPlotly";
 
 const TabsDemo = () => {
-  const [tab, setTab] = useState("one");
+  const [userProjects, setUserProjects] = useState([]);
+  const [tab, setTab] = useState("new");
   const intl = useIntl();
 
-  const [userProjects, setUserProjects] = useState({});
-
   useEffect(() => {
-    fetch("http://127.0.0.1:3000/projects/5")
+    fetch("http://127.0.0.1:3000/projects/")
       .then(response => response.json())
-      .then(userProjects => setUserProjects(userProjects))
-      .then(renderProjectTabs());
+      .then(projects => setUserProjects(projects));
   }, []);
 
-  const renderProjectTabGraphs = () => {
-    let graphs = userProjects["graphs"];
-    console.log(graphs);
-    if (graphs) {
-      return graphs.map(graph => {
-        let xAxis = graph["x_axis_array"].split(",");
-        let projectionLower = graph["proj_low_array"].split(",");
-        let projection = graph["proj_array"].split(",");
-        let projectionUpper = graph["proj_high_array"].split(",");
-        let stockSym = graph["stock_sym"];
+  console.log(userProjects);
+  // const renderGraphs = graphs => {
+  //   return graphs.map(graph => {
+  //     let xAxis = graph["x_axis_array"].split(",");
+  //     let projectionLower = graph["proj_low_array"].split(",");
+  //     let projection = graph["proj_array"].split(",");
+  //     let projectionUpper = graph["proj_high_array"].split(",");
+  //     let stockSym = graph["stock_sym"];
 
-        return (
-          <UserPlotly
-            xAxis={xAxis}
-            projectionLower={projectionLower}
-            projection={projection}
-            projectionUpper={projectionUpper}
-            stockSym={stockSym}
-          />
-        );
+  //     return (
+  //       <UserPlotly
+  //         xAxis={xAxis}
+  //         projectionLower={projectionLower}
+  //         projection={projection}
+  //         projectionUpper={projectionUpper}
+  //         stockSym={stockSym}
+  //       />
+  //     );
+  //   });
+  // };
+
+  const renderTabLabels = () => {
+    if (userProjects.length) {
+      return userProjects.map(project => {
+        return <Tab label={project.name} value={project.id} />;
       });
+    } else {
+      return <Tab label='new' value='new' />;
     }
   };
 
-  const renderProjectTabs = () => {
-    if (Object.keys(userProjects)) {
-      Object.values(userProjects).map(proj => {
-        return <Tab label={proj["name"]} value={proj["name"]} />;
-      });
-    }
+  const renderProjectPageGraphs = () => {
+    console.log("test", userProjects);
+  };
 
+  const returnThisThing = () => {
     return (
-      <Tabs
-        value={tab}
-        onChange={(e, t) => setTab(t)}
-        aria-label='project tabs'
-        centered
-      >
-        <Tab label='Item One' value='one' />
-        <Tab label='Item Two' value='two' />
-        <Tab label='Item Three' value='three' />
-      </Tabs>
+      <>
+        {" "}
+        <Tabs
+          value={tab}
+          onChange={(e, t) => setTab(t)}
+          aria-label='project tabs'
+          variant='scrollable'
+          scrollButtons='on'
+        ></Tabs>{" "}
+      </>
     );
   };
 
@@ -72,13 +75,7 @@ const TabsDemo = () => {
       })}
       tabs={<AppBar position='static'></AppBar>}
     >
-      {" "}
-      {renderProjectTabs()}
-      <div>
-        {tab === "one" && renderProjectTabGraphs()}
-        {tab === "two" && <div>Two</div>}
-        {tab === "three" && <div>Three</div>}
-      </div>
+      {returnThisThing()}
     </Page>
   );
 };

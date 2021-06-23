@@ -1,11 +1,11 @@
 import React from "react";
 import {
   AccountBox as AccountBoxIcon,
-  ChatBubble,
+  // ChatBubble,
   ChromeReaderMode,
   Dashboard as DashboardIcon,
   ExitToApp as ExitToAppIcon,
-  FilterList,
+  // FilterList,
   FormatTextdirectionRToL as RTLIcon,
   FormatTextdirectionLToR as LTRIcon,
   GetApp,
@@ -13,11 +13,11 @@ import {
   Language as LanguageIcon,
   Lock as LockIcon,
   MenuOpen as MenuOpenIcon,
-  QuestionAnswer,
+  // QuestionAnswer,
   SettingsApplications as SettingsIcon,
   Style as StyleIcon,
   Tab,
-  ViewList,
+  // ViewList,
   Web,
 } from "@material-ui/icons";
 
@@ -120,7 +120,16 @@ const getMenuItems = props => {
           visible: isAuthorised,
           primaryText: intl.formatMessage({
             id: "stock_cast",
-            defaultMessage: "Stock Cast",
+            defaultMessage: "Cast Stock",
+          }),
+          leftIcon: <img alt='cast icon' src={castIcon}></img>,
+        },
+        {
+          value: "/csv_cast",
+          visible: isAuthorised,
+          primaryText: intl.formatMessage({
+            id: "csv_cast",
+            defaultMessage: "Cast CSV",
           }),
           leftIcon: <img alt='cast icon' src={castIcon}></img>,
         },

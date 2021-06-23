@@ -6,6 +6,7 @@
     "@formatjs/intl-relativetimeformat": "8.x",
     "@material-ui/core": "4.x",
     "@material-ui/icons": "4.x",
+    "@material-ui/lab": "^4.0.0-alpha.58",
     "base-shell": "1.x",
     "csv": "^5.5.0",
     "github-markdown-css": "4.x",
