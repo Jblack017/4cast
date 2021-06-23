@@ -19,7 +19,7 @@ const LandingPage = () => {
     >
       <img src={landingLogoQuote} alt='landing page logo' />
       <div>
-        <Link to='/home'>Home</Link>
+        <Link to='/home'>Go To App</Link>
       </div>
     </div>
   );

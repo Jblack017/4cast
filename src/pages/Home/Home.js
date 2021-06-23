@@ -3,7 +3,9 @@ import React from "react";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
 import { useIntl } from "react-intl";
 import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
+import graphExample from "./graph_example.PNG";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -26,9 +28,12 @@ const HomePage = () => {
   return (
     <Page pageTitle={intl.formatMessage({ id: "home" })}>
       <Scrollbar className={classes.scrollbar}>
-        <Paper>
-          <h1>Hi. Welcome Home</h1>
-        </Paper>
+        <Box
+          component='span'
+          m={1}
+          alignItems='center'
+          justifyContent='center'
+        ></Box>
       </Scrollbar>
     </Page>
   );

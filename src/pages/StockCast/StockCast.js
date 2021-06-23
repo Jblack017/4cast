@@ -80,7 +80,7 @@ const StockCast = () => {
 
   const fetchFourCast = stockData => {
     const stockObject = { data: stockData };
-    setLoadingMessage(`Sent ${stockSymbol} to the crystal ball`);
+    setLoadingMessage(`Sent ${stockSymbol} to FB Prophet on Heroku`);
     fetch("https://four-cast-app.herokuapp.com/", {
       method: "POST",
       headers: {
@@ -154,8 +154,8 @@ const StockCast = () => {
   return (
     <Page
       pageTitle={intl.formatMessage({
-        id: "stock_cast",
-        defaultMessage: "Stock Cast",
+        id: "cast_stock",
+        defaultMessage: "Cast Stock",
       })}
     >
       <Scrollbar className={classes.scrollbar}>

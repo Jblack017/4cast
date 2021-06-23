@@ -25,12 +25,16 @@ const About = () => {
       className={classes.page}
     >
       <Paper className={classes.paper}>
+        <h1>Hello!</h1>
+        <h3>4Cast is a new app designed to help plan for the future.</h3>
         <img src={logo} alt='logo' />
-        <h2>
-          Are you counting widgets, fidgets, rocks, socks, or stocks over time?
-          Or, any value tracked over time? Then 4Cast is the place to see what
-          the future might bring.
-        </h2>
+        <p>
+          We are a continually developing platform focused on helping
+          individuals and business plan fo the future. By using the magic
+          thinkalator, we analyze time series data to provide informed
+          forecasting.
+        </p>
+        <p>Come Plan With Us!</p>
       </Paper>
     </Page>
   );

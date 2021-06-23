@@ -17,11 +17,11 @@ const useStyles = makeStyles(theme => ({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(0),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    backgroundColor: theme.palette.primary.main,
-    fontSize: "2em",
+    backgroundColor: theme.palette.primary.light,
+    fontSize: "2.7em",
   },
   scrollbar: { height: "70%", width: "70%", display: "flex", flex: 1 },
   button: { margin: theme.spacing(3) },
@@ -36,7 +36,7 @@ const CsvCast = () => {
   const [projection, setProjection] = useState(null);
   const [projectionUpper, setProjectionUpper] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [loadingMessage, setLoadingMessage] = useState("Drag and Drop a CSV");
+  const [loadingMessage, setLoadingMessage] = useState("Your Future Awaits");
   const [fileName, setFileName] = useState("file name");
 
   const onDrop = useCallback(
@@ -123,23 +123,35 @@ const CsvCast = () => {
     <Page
       pageTitle={intl.formatMessage({
         id: "stock_cast",
-        defaultMessage: "Stock Cast",
+        defaultMessage: "Cast CSV",
       })}
     >
       <Scrollbar className={classes.scrollbar}>
-        <Grid container justify='center' className={classes.grid}>
+        <Grid
+          container
+          justify='center'
+          alignItems='center'
+          className={classes.grid}
+          spacing={0}
+        >
           {!xAxis ? (
             <>
-              <Grid item center lg={1}>
-                <Paper variant='outlined' elevation={3} {...getRootProps()}>
-                  <input width='250px' {...getInputProps()} />
-                  {isDragActive ? (
-                    <p>Drop the files here ...</p>
-                  ) : (
-                    <p>Drag and Drop a CSV here...or Click to Select File.</p>
-                  )}
-                </Paper>
-              </Grid>
+              {!loading ? (
+                <Grid item lg={12} alignItems='center'>
+                  <Paper {...getRootProps()}>
+                    <input {...getInputProps()} />
+                    {isDragActive ? (
+                      <Paper className={classes.paper}>
+                        Drop the files here ...
+                      </Paper>
+                    ) : (
+                      <Paper className={classes.paper}>
+                        Drag and Drop a CSV here...or Click to Select File.
+                      </Paper>
+                    )}
+                  </Paper>
+                </Grid>
+              ) : null}
             </>
           ) : (
             <>
