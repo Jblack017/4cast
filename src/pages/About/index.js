@@ -29,10 +29,12 @@ const About = () => {
         <h3>4Cast is a new app designed to help plan for the future.</h3>
         <img src={logo} alt='logo' />
         <p>
-          We are a continually developing platform focused on helping
-          individuals and business plan fo the future. By using the magic
-          thinkalator, we analyze time series data to provide informed
-          forecasting.
+          We are a continually developing progressive web app focused on helping
+          individuals and businesses plan for the future. By way of our{" "}
+          <strong>"Highly proprietary"</strong> and{" "}
+          <strong>"very secret Thinkalator"</strong>, we analyze time series
+          data to provide informed forecasting. Our goal is to give you more
+          time to make the decisions that matter.
         </p>
         <p>Come Plan With Us!</p>
       </Paper>

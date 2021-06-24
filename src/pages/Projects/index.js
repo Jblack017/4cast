@@ -55,7 +55,13 @@ const Projects = () => {
       })}
       tabs={
         <AppBar position='static'>
-          <Tabs value={tab} aria-label='simple tabs example' centered>
+          <Tabs
+            value={tab}
+            aria-label='simple tabs example'
+            scrollButtons='true'
+            variant='auto'
+            centered
+          >
             {userProjects.length ? (
               userProjects.map(project => {
                 return (

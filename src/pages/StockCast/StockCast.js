@@ -49,10 +49,15 @@ const useStyles = makeStyles(theme => ({
   },
   details: {
     alignItems: "center",
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.secondary.light,
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
+    height: `100%`,
   },
   column: {
-    flexBasis: "66.66%",
+    flexBasis: "100%",
   },
   helper: {
     borderLeft: `2px solid ${theme.palette.divider}`,
@@ -85,6 +90,8 @@ const StockCast = () => {
   );
   const [projects, setProjects] = useState([]);
   const [project, setProject] = useState({});
+  const [projectName, setProjectName] = useState("");
+  const [projectDescription, setProjectDescription] = useState("");
 
   const baseURL = "https://www.alphavantage.co/query?";
   const intraDayTS = "function=TIME_SERIES_DAILY_ADJUSTED&symbol=";
@@ -168,9 +175,31 @@ const StockCast = () => {
   };
 
   const handleSaveNew = () => {
-    console.log(
-      "modal with form entry and button to submit new project with graph"
-    );
+    let projectObject = {
+      project: {
+        name: projectName,
+        description: projectDescription,
+        graph: {
+          stock_sym: `${stockSymbol.toString().toUpperCase()} Casted ${Date()
+            .split(" ")
+            .slice(0, 5)
+            .join(" ")}`,
+          x_axis_array: xAxis.toString(),
+          proj_low_array: projectionLower.toString(),
+          proj_high_array: projection.toString(),
+          proj_array: projectionUpper.toString(),
+        },
+      },
+    };
+    fetch("http://localhost:3000/projects/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(projectObject),
+    })
+      .then(response => response.json())
+      .then(window.alert(`${stockSymbol} has been saved to ${projectName}`));
   };
 
   const handleSaveExisting = () => {
@@ -272,15 +301,51 @@ const StockCast = () => {
                 </Button>
               </Grid>
               <Grid item xs={4} sm={4}>
-                <Button
-                  className={classes.button}
-                  size='large'
-                  variant='contained'
-                  color='primary'
-                  onClick={handleSaveNew}
-                >
-                  Save to New Project
-                </Button>
+                <Paper className={classes.root}>
+                  <Accordion defaultExpanded={false}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls='panel1c-content'
+                      id='panel1c-header'
+                    >
+                      <div className={classes.column}>
+                        <Typography className={classes.heading}>
+                          Save to New
+                        </Typography>
+                      </div>
+                      <div className={classes.column}></div>
+                    </AccordionSummary>
+                    <AccordionDetails className={classes.details}>
+                      <div className={classes.column} />
+                      <TextField
+                        id='standard-basic'
+                        label='Name Project'
+                        value={projectName}
+                        onChange={e => setProjectName(e.target.value)}
+                      />
+                      <br></br>
+                      <TextField
+                        id='outlined-multiline-flexible'
+                        label='Describe Project'
+                        multiline
+                        rowsMax={4}
+                        value={projectDescription}
+                        onChange={e => setProjectDescription(e.target.value)}
+                        variant='outlined'
+                      />
+                    </AccordionDetails>
+                    <Divider />
+                    <AccordionActions>
+                      <Button
+                        size='small'
+                        color='primary'
+                        onClick={() => handleSaveNew()}
+                      >
+                        Save
+                      </Button>
+                    </AccordionActions>
+                  </Accordion>
+                </Paper>
               </Grid>
               <Grid item xs={4} sm={4}>
                 <Paper className={classes.root}>
