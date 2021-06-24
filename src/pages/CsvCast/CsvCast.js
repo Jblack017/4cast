@@ -258,7 +258,7 @@ const CsvCast = () => {
                     <input {...getInputProps()} />
                     {isDragActive ? (
                       <Paper className={classes.paper}>
-                        Drop the files here ...
+                        Drop the file here ...
                       </Paper>
                     ) : (
                       <Paper className={classes.paper}>

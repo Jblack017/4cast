@@ -5,9 +5,10 @@ import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import { useIntl } from "react-intl";
 import UserPlotly from "graphs/UserPlotly";
+import Tooltip from "@material-ui/core/Tooltip";
 
 const Projects = () => {
-  const [tab, setTab] = useState("A");
+  const [tab, setTab] = useState(40);
   const [userProjects, setUserProjects] = useState([]);
   const intl = useIntl();
 
@@ -64,12 +65,18 @@ const Projects = () => {
           >
             {userProjects.length ? (
               userProjects.map(project => {
+                console.log(project);
                 return (
-                  <Tab
-                    onClick={() => setTab(project.id)}
-                    label={project.name}
-                    value={project.id}
-                  />
+                  <Tooltip
+                    title={project.description}
+                    aria-label={project.description}
+                  >
+                    <Tab
+                      onClick={() => setTab(project.id)}
+                      label={project.name}
+                      value={project.id}
+                    />
+                  </Tooltip>
                 );
               })
             ) : (

@@ -52,7 +52,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.light,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     justifyContent: "center",
     height: `100%`,
   },
@@ -166,6 +165,7 @@ const StockCast = () => {
         setProjectionLower(projLower);
         setProjectionUpper(projUpper);
         setLoadingMessage(`${stockSymbol} loaded`);
+        setProjectName(stockSymbol);
         setLoading(false);
       } else {
         console.error(err);
