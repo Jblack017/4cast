@@ -89,8 +89,10 @@ const CsvCast = () => {
   const [fileName, setFileName] = useState("file name");
   const [projects, setProjects] = useState([]);
   const [project, setProject] = useState({});
-  const [projectName, setProjectName] = useState("");
-  const [projectDescription, setProjectDescription] = useState("");
+  const [projectName, setProjectName] = useState("Project Name");
+  const [projectDescription, setProjectDescription] = useState(
+    "Enter Description Here"
+  );
 
   const onDrop = useCallback(
     acceptedFile => {
@@ -177,7 +179,11 @@ const CsvCast = () => {
       body: JSON.stringify(stockObject),
     })
       .then(response => response.json())
-      .then(window.alert("Project Saved"));
+      .then(
+        window.alert(
+          `${fileName.split(" ")[0]} has been saved to ${project.name}`
+        )
+      );
   };
 
   const handleSaveNew = () => {

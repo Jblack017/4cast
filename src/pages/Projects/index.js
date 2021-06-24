@@ -57,9 +57,9 @@ const Projects = () => {
         <AppBar position='static'>
           <Tabs
             value={tab}
-            aria-label='simple tabs example'
-            scrollButtons='true'
-            variant='auto'
+            variant='scrollable'
+            scrollButtons='auto'
+            aria-label='scrollable auto tabs example'
             centered
           >
             {userProjects.length ? (
