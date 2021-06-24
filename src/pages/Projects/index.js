@@ -22,7 +22,7 @@ const Projects = () => {
           setTab(userProjects[0]["id"]);
         }
       });
-  }, [userProjects]);
+  }, []);
 
   const renderUserProjects = () => {
     if (!userProjects.length) {

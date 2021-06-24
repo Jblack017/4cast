@@ -66,10 +66,7 @@ export default function UserPlotly({
               },
             ]}
             layout={{
-              title: `${stockSym} Casted ${Date()
-                .split(" ")
-                .slice(0, 5)
-                .join(" ")}`,
+              title: stockSym,
               margin: { t: 75, l: 40, r: 20, b: 40 },
               showlegend: false,
               autosize: true,

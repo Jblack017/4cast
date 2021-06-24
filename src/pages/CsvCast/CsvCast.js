@@ -10,10 +10,27 @@ import Button from "@material-ui/core/Button";
 import csv from "csv";
 import { useDropzone } from "react-dropzone";
 import Skeleton from "@material-ui/lab/Skeleton";
+import clsx from "clsx";
+import Accordion from "@material-ui/core/Accordion";
+import AccordionDetails from "@material-ui/core/AccordionDetails";
+import AccordionSummary from "@material-ui/core/AccordionSummary";
+import AccordionActions from "@material-ui/core/AccordionActions";
+import Typography from "@material-ui/core/Typography";
+import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
+import Chip from "@material-ui/core/Chip";
+import Divider from "@material-ui/core/Divider";
+import { useEffect } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import DoneIcon from "@material-ui/icons/Done";
 
 const useStyles = makeStyles(theme => ({
   root: {
     flexGrow: 1,
+    width: "100%",
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(15),
+    fontWeight: theme.typography.fontWeightRegular,
   },
   paper: {
     padding: theme.spacing(0),
@@ -21,6 +38,32 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.secondary,
     backgroundColor: theme.palette.primary.light,
     fontSize: "2.7em",
+  },
+  secondaryHeading: {
+    fontSize: theme.typography.pxToRem(15),
+    color: theme.palette.text.secondary,
+  },
+  icon: {
+    verticalAlign: "bottom",
+    height: 20,
+    width: 20,
+  },
+  details: {
+    alignItems: "center",
+  },
+  column: {
+    flexBasis: "33.33%",
+  },
+  helper: {
+    borderLeft: `2px solid ${theme.palette.divider}`,
+    padding: theme.spacing(1, 2),
+  },
+  link: {
+    color: theme.palette.primary.main,
+    textDecoration: "none",
+    "&:hover": {
+      textDecoration: "underline",
+    },
   },
   scrollbar: { height: "70%", width: "70%", display: "flex", flex: 1 },
   button: { margin: theme.spacing(3) },
@@ -37,6 +80,8 @@ const CsvCast = () => {
   const [loading, setLoading] = useState(false);
   const [loadingMessage, setLoadingMessage] = useState("Your Future Awaits");
   const [fileName, setFileName] = useState("file name");
+  const [projects, setProjects] = useState([]);
+  const [projectID, setProjectID] = useState(0);
 
   const onDrop = useCallback(
     acceptedFile => {
@@ -81,7 +126,12 @@ const CsvCast = () => {
           })
           .catch(promiseError => console.error(promiseError));
       };
-      setFileName(acceptedFile[0].name.split(".")[0]);
+      setFileName(
+        `${acceptedFile[0].name.split(".")[0]} Casted ${Date()
+          .split(" ")
+          .slice(0, 5)
+          .join(" ")}`
+      );
       reader.readAsText(acceptedFile[0]);
       reader.onload = () => {
         csv.parse(reader.result, (err, data) => {
@@ -98,10 +148,17 @@ const CsvCast = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  const handleSave = () => {
+  const lookupExisting = () => {
+    console.log("Go love you self");
+  };
+
+  const handleSaveExisting = () => {
     let stockObject = {
-      project: "5",
-      stock_sym: fileName.toString().toUpperCase(),
+      project: projectID,
+      stock_sym: `${fileName} Casted ${Date()
+        .split(" ")
+        .slice(0, 5)
+        .join(" ")}`,
       x_axis_array: xAxis.toString(),
       proj_low_array: projectionLower.toString(),
       proj_high_array: projection.toString(),
@@ -116,6 +173,33 @@ const CsvCast = () => {
     })
       .then(response => response.json())
       .then(console.log);
+  };
+
+  const handleSaveNew = () => {
+    console.log(
+      "modal with form entry and button to submit new project with graph"
+    );
+  };
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:3000/projects/")
+      .then(response => response.json())
+      .then(setProjects);
+  }, []);
+
+  const renderProjectChips = () => {
+    return projects.map(project => {
+      return (
+        <Chip
+          color='primary'
+          size='small'
+          label={project.name}
+          deleteIcon={<DoneIcon />}
+          onDelete={() => setProjectID(project.id)}
+          avatar={<Avatar>{project.id}</Avatar>}
+        />
+      );
+    });
   };
 
   return (
@@ -171,10 +255,53 @@ const CsvCast = () => {
                   size='large'
                   variant='contained'
                   color='primary'
-                  onClick={handleSave}
+                  onClick={handleSaveNew}
                 >
-                  Save to Project
+                  Save to New Project
                 </Button>
+              </Grid>
+              <Grid item xs={4} sm={4}>
+                <div className={classes.root}>
+                  <Accordion defaultExpanded={false}>
+                    <AccordionSummary
+                      expandIcon={<ExpandMoreIcon />}
+                      aria-controls='panel1c-content'
+                      id='panel1c-header'
+                    >
+                      <div className={classes.column}>
+                        <Typography className={classes.heading}>
+                          Save to Existing
+                        </Typography>
+                      </div>
+                      <div className={classes.column}></div>
+                    </AccordionSummary>
+                    <AccordionDetails className={classes.details}>
+                      <div className={classes.column} />
+                      <div className={classes.column}>
+                        {renderProjectChips()}
+                      </div>
+                    </AccordionDetails>
+                    <Divider />
+                    <AccordionActions>
+                      <Button
+                        size='small'
+                        color='primary'
+                        onClick={() => handleSaveExisting()}
+                      >
+                        Save
+                      </Button>
+                    </AccordionActions>
+                  </Accordion>
+                </div>
+                {/* <Button
+                  className={classes.button}
+                  size='large'
+                  variant='contained'
+                  color='primary'
+                  onClick={lookupExisting}
+                >
+                  Save to Existing Project
+                </Button> */}
               </Grid>
             </>
           )}
