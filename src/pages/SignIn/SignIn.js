@@ -73,7 +73,7 @@ const SignIn = () => {
     toggleThis("isAuthMenuOpen", false);
 
     let _location = history.location;
-    let _route = "/home";
+    let _route = "/projects";
 
     if (_location.state && _location.state.from) {
       _route = _location.state.from.pathname;

@@ -95,12 +95,12 @@ const getMenuItems = props => {
     ];
   }
   return [
-    {
-      value: "/home",
-      visible: isAuthorised,
-      primaryText: intl.formatMessage({ id: "home" }),
-      leftIcon: <DashboardIcon />,
-    },
+    // {
+    //   value: "/home",
+    //   visible: isAuthorised,
+    //   primaryText: intl.formatMessage({ id: "home" }),
+    //   leftIcon: <DashboardIcon />,
+    // },
     {
       value: "/projects",
       visible: isAuthorised,

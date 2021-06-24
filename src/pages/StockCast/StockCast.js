@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     fontWeight: theme.typography.fontWeightRegular,
   },
   paper: {
-    padding: theme.spacing(0),
+    padding: theme.spacing(1),
     textAlign: "center",
     color: theme.palette.text.secondary,
     backgroundColor: theme.palette.primary.light,
@@ -283,7 +283,7 @@ const StockCast = () => {
                 </Button>
               </Grid>
               <Grid item xs={4} sm={4}>
-                <div className={classes.root}>
+                <Paper className={classes.root}>
                   <Accordion defaultExpanded={false}>
                     <AccordionSummary
                       expandIcon={<ExpandMoreIcon />}
@@ -314,7 +314,7 @@ const StockCast = () => {
                       </Button>
                     </AccordionActions>
                   </Accordion>
-                </div>
+                </Paper>
               </Grid>
             </>
           )}

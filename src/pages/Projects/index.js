@@ -29,10 +29,9 @@ const Projects = () => {
       console.error("no user project length");
     } else {
       const foundProjects = userProjects.filter(project => project.id === tab);
-      return foundProjects.map(project => {
-        const orderedGraphs = project.graphs.reverse();
-
-        return orderedGraphs.map(graph => {
+      return foundProjects.map(proj => {
+        proj.graphs.reverse();
+        return proj.graphs.map(graph => {
           return (
             <UserPlotly
               xAxis={graph["x_axis_array"].split(",")}

@@ -30,7 +30,7 @@ const routes = [
   />,
   <Route path='/about' exact component={About} />,
   <AuthorizedRoute path='/my_account' exact component={MyAccount} />,
-  <AuthorizedRoute path='/home' exact component={Home} />,
+  // <AuthorizedRoute path='/home' exact component={Home} />,
   <AuthorizedRoute path='/stock_cast' exact component={StockCast} />,
   <AuthorizedRoute path='/csv_cast' exact component={CsvCast} />,
   <AuthorizedRoute path='/toast_demo' exact component={ToastDemo} />,
