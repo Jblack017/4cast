@@ -10,7 +10,6 @@ import Button from "@material-ui/core/Button";
 import csv from "csv";
 import { useDropzone } from "react-dropzone";
 import Skeleton from "@material-ui/lab/Skeleton";
-import clsx from "clsx";
 import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
@@ -36,7 +35,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(0),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    backgroundColor: theme.palette.primary.light,
+    backgroundColor: theme.palette.secondary.main,
     fontSize: "2.7em",
   },
   secondaryHeading: {
@@ -50,9 +49,10 @@ const useStyles = makeStyles(theme => ({
   },
   details: {
     alignItems: "center",
+    backgroundColor: theme.palette.secondary.main,
   },
   column: {
-    flexBasis: "33.33%",
+    flexBasis: "66.66%",
   },
   helper: {
     borderLeft: `2px solid ${theme.palette.divider}`,
@@ -81,7 +81,7 @@ const CsvCast = () => {
   const [loadingMessage, setLoadingMessage] = useState("Your Future Awaits");
   const [fileName, setFileName] = useState("file name");
   const [projects, setProjects] = useState([]);
-  const [projectID, setProjectID] = useState(0);
+  const [project, setProject] = useState({});
 
   const onDrop = useCallback(
     acceptedFile => {
@@ -148,13 +148,9 @@ const CsvCast = () => {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
 
-  const lookupExisting = () => {
-    console.log("Go love you self");
-  };
-
   const handleSaveExisting = () => {
     let stockObject = {
-      project: projectID,
+      project: project.id,
       stock_sym: `${fileName} Casted ${Date()
         .split(" ")
         .slice(0, 5)
@@ -172,7 +168,7 @@ const CsvCast = () => {
       body: JSON.stringify(stockObject),
     })
       .then(response => response.json())
-      .then(console.log);
+      .then(window.alert("Project Saved"));
   };
 
   const handleSaveNew = () => {
@@ -195,7 +191,7 @@ const CsvCast = () => {
           size='small'
           label={project.name}
           deleteIcon={<DoneIcon />}
-          onDelete={() => setProjectID(project.id)}
+          onDelete={() => setProject(project)}
           avatar={<Avatar>{project.id}</Avatar>}
         />
       );
@@ -293,15 +289,6 @@ const CsvCast = () => {
                     </AccordionActions>
                   </Accordion>
                 </div>
-                {/* <Button
-                  className={classes.button}
-                  size='large'
-                  variant='contained'
-                  color='primary'
-                  onClick={lookupExisting}
-                >
-                  Save to Existing Project
-                </Button> */}
               </Grid>
             </>
           )}
