@@ -1,2 +1,0 @@
-(this.webpackJsonp4Cast=this.webpackJsonp4Cast||[]).push([[20],{615:function(t,e,i){"use strict";i.r(e);i(0);var n=i(80),o=i.p+"static/media/landing_logo_quote.bc8cc004.PNG",s=i(31);e.default=function(){return Object(s.jsxs)("div",{style:{position:"absolute",left:0,top:0,bottom:0,right:0,display:"flex",justifyContent:"center",alignItems:"center",flexDirection:"column"},children:[Object(s.jsx)("img",{src:o,alt:"landing page logo"}),Object(s.jsx)("div",{children:Object(s.jsx)(n.Link,{to:"/home",children:"Go To App"})})]})}}}]);
-//# sourceMappingURL=20.b9919ca6.chunk.js.map
