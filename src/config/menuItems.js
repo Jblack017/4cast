@@ -3,7 +3,7 @@ import {
   AccountBox as AccountBoxIcon,
   // ChatBubble,
   ChromeReaderMode,
-  Dashboard as DashboardIcon,
+  // Dashboard as DashboardIcon,
   ExitToApp as ExitToAppIcon,
   // FilterList,
   FormatTextdirectionRToL as RTLIcon,

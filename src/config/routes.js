@@ -10,7 +10,6 @@ const PasswordReset = lazy(() =>
   import("../pages/PasswordReset/PasswordReset")
 );
 const About = lazy(() => import("../pages/About"));
-const Home = lazy(() => import("../pages/Home/Home"));
 const StockCast = lazy(() => import("../pages/StockCast/StockCast"));
 const CsvCast = lazy(() => import("../pages/CsvCast/CsvCast"));
 const ToastDemo = lazy(() => import("../pages/ToastDemo/ToastDemo"));

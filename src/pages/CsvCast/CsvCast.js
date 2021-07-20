@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(1),
     textAlign: "center",
     color: theme.palette.text.secondary,
-    backgroundColor: theme.palette.secondary.main,
+    backgroundColor: theme.palette.primary.light,
     fontSize: "2.7em",
   },
   secondaryHeading: {
@@ -53,7 +53,6 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.secondary.light,
     display: "flex",
     flexDirection: "column",
-    alignItems: "center",
     justifyContent: "center",
     height: `100%`,
   },
@@ -149,7 +148,7 @@ const CsvCast = () => {
           if (err) {
             return console.error("Parsed CSV error: ", err);
           }
-          setLoadingMessage("Waiting for response from FB Prophet ");
+          setLoadingMessage("Waiting on your 90 Day Forecast");
           thinkalatorIO(data);
         });
       };

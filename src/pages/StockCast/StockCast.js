@@ -131,7 +131,7 @@ const StockCast = () => {
 
   const fetchFourCast = stockData => {
     const stockObject = { data: stockData };
-    setLoadingMessage(`Sent ${stockSymbol} to FB Prophet on Heroku`);
+    setLoadingMessage(`Waiting on ${stockSymbol} 90 Day Forecast`);
     fetch("https://four-cast-app.herokuapp.com/", {
       method: "POST",
       headers: {
