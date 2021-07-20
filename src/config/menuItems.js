@@ -26,21 +26,13 @@ import allThemes from "./themes";
 import castIcon from "./icon.png";
 
 const getMenuItems = props => {
-  const {
-    intl,
-    updateLocale,
-    locale,
-    menuContext,
-    themeContext,
-    a2HSContext,
-    auth: authData,
-  } = props;
+  const { intl, updateLocale, locale, menuContext, themeContext, a2HSContext } =
+    props;
 
   const { toggleThis, isDesktop, isAuthMenuOpen, isMiniSwitchVisibility } =
     menuContext;
   const { themeID, setThemeID, isRTL, toggleThisTheme } = themeContext;
 
-  const { auth, setAuth } = authData;
   const { isAppInstallable, isAppInstalled, deferredPrompt } = a2HSContext;
 
   const localeItems = allLocales.map(l => {
@@ -55,7 +47,7 @@ const getMenuItems = props => {
     };
   });
 
-  const isAuthorised = auth.isAuthenticated;
+  const isAuthorised = true;
 
   const themeItems = allThemes.map(t => {
     return {
@@ -69,7 +61,7 @@ const getMenuItems = props => {
     };
   });
 
-  if (isAuthMenuOpen || !isAuthorised) {
+  if (!isAuthMenuOpen) {
     return [
       {
         value: "/my_account",
@@ -81,11 +73,7 @@ const getMenuItems = props => {
       },
       {
         value: "/signin",
-        onClick: isAuthorised
-          ? () => {
-              setAuth({ isAuthenticated: false });
-            }
-          : () => {},
+        onClick: isAuthorised ? () => {} : () => {},
         visible: true,
         primaryText: isAuthorised
           ? intl.formatMessage({ id: "sign_out" })
@@ -95,14 +83,8 @@ const getMenuItems = props => {
     ];
   }
   return [
-    // {
-    //   value: "/home",
-    //   visible: isAuthorised,
-    //   primaryText: intl.formatMessage({ id: "home" }),
-    //   leftIcon: <DashboardIcon />,
-    // },
     {
-      value: "/projects",
+      value: "/4cast/projects",
       visible: isAuthorised,
       primaryText: intl.formatMessage({
         id: "projects",
@@ -116,7 +98,7 @@ const getMenuItems = props => {
       leftIcon: <Web />,
       nestedItems: [
         {
-          value: "/stock_cast",
+          value: "/4cast/stock_cast",
           visible: isAuthorised,
           primaryText: intl.formatMessage({
             id: "stock_cast",
@@ -125,7 +107,7 @@ const getMenuItems = props => {
           leftIcon: <img alt='cast icon' src={castIcon}></img>,
         },
         {
-          value: "/csv_cast",
+          value: "/4cast/csv_cast",
           visible: isAuthorised,
           primaryText: intl.formatMessage({
             id: "csv_cast",
@@ -133,37 +115,10 @@ const getMenuItems = props => {
           }),
           leftIcon: <img alt='cast icon' src={castIcon}></img>,
         },
-        // {
-        //   value: "/toast_demo",
-        //   visible: isAuthorised,
-        //   primaryText: intl.formatMessage({
-        //     id: "toast_demo",
-        //     defaultMessage: "Toast",
-        //   }),
-        //   leftIcon: <QuestionAnswer />,
-        // },
-        // {
-        //   value: "/filter_demo",
-        //   visible: isAuthorised,
-        //   primaryText: intl.formatMessage({
-        //     id: "filter_demo",
-        //     defaultMessage: "Filter",
-        //   }),
-        //   leftIcon: <FilterList />,
-        // },
-        // {
-        //   value: "/list_page_demo",
-        //   visible: isAuthorised,
-        //   primaryText: intl.formatMessage({
-        //     id: "list_page_demo_menu",
-        //     defaultMessage: "List Page",
-        //   }),
-        //   leftIcon: <ViewList />,
-        // },
       ],
     },
     {
-      value: "/about",
+      value: "/4cast/about",
       visible: true,
       primaryText: intl.formatMessage({ id: "about" }),
       leftIcon: <InfoOutlined />,
