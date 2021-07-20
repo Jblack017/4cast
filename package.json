@@ -1,7 +1,7 @@
 {
-  "homepage": "https://jblack017.github.io/4cast",
+  "homepage": "https://jblack017.github.io/4cast/",
   "name": "4Cast",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@formatjs/intl-relativetimeformat": "8.x",
