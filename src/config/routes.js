@@ -9,6 +9,7 @@ const Projects = lazy(() => import("../pages/Projects"));
 
 const routes = [
   <Route path='/4cast' exact component={About} />,
+  <Route path='/4cast/about' exact component={About} />,
   <Route path='/4cast/stock_cast' exact component={StockCast} />,
   <Route path='/4cast/csv_cast' exact component={CsvCast} />,
   <Route path='/4cast/projects' exact component={Projects} />,
