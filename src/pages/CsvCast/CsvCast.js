@@ -84,7 +84,9 @@ const CsvCast = () => {
   const [projection, setProjection] = useState(null);
   const [projectionUpper, setProjectionUpper] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [loadingMessage, setLoadingMessage] = useState("Your Future Awaits");
+  const [loadingMessage, setLoadingMessage] = useState(
+    "CSV can only contain two columns. first column requires date and second requires value in that order"
+  );
   const [fileName, setFileName] = useState("file name");
   const [projects, setProjects] = useState([]);
   const [project, setProject] = useState({});

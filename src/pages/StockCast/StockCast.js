@@ -15,11 +15,11 @@ import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionActions from "@material-ui/core/AccordionActions";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import Chip from "@material-ui/core/Chip";
+// import Chip from "@material-ui/core/Chip";
 import Divider from "@material-ui/core/Divider";
-import { useEffect } from "react";
-import Avatar from "@material-ui/core/Avatar";
-import DoneIcon from "@material-ui/icons/Done";
+// import { useEffect } from "react";
+// import Avatar from "@material-ui/core/Avatar";
+// import DoneIcon from "@material-ui/icons/Done";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -96,8 +96,8 @@ const StockCast = () => {
   const [loadingMessage, setLoadingMessage] = useState(
     "Search a ticker symbol above"
   );
-  const [projects, setProjects] = useState([]);
-  const [project, setProject] = useState({});
+  // const [projects, setProjects] = useState([]);
+  // const [project, setProject] = useState({});
   const [projectName, setProjectName] = useState("");
   const [projectDescription, setProjectDescription] = useState("");
 
@@ -183,76 +183,76 @@ const StockCast = () => {
   };
 
   const handleSaveNew = () => {
-    let projectObject = {
-      project: {
-        name: projectName,
-        description: projectDescription,
-        graph: {
-          stock_sym: `${stockSymbol.toString().toUpperCase()} Casted ${Date()
-            .split(" ")
-            .slice(0, 5)
-            .join(" ")}`,
-          x_axis_array: xAxis.toString(),
-          proj_low_array: projectionLower.toString(),
-          proj_high_array: projection.toString(),
-          proj_array: projectionUpper.toString(),
-        },
-      },
-    };
-    fetch("http://localhost:3000/projects/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(projectObject),
-    })
-      .then(response => response.json())
-      .then(window.alert(`${stockSymbol} has been saved to ${projectName}`));
+    // let projectObject = {
+    //   project: {
+    //     name: projectName,
+    //     description: projectDescription,
+    //     graph: {
+    //       stock_sym: `${stockSymbol.toString().toUpperCase()} Casted ${Date()
+    //         .split(" ")
+    //         .slice(0, 5)
+    //         .join(" ")}`,
+    //       x_axis_array: xAxis.toString(),
+    //       proj_low_array: projectionLower.toString(),
+    //       proj_high_array: projection.toString(),
+    //       proj_array: projectionUpper.toString(),
+    //     },
+    //   },
+    // };
+    // fetch("http://localhost:3000/projects/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(projectObject),
+    // })
+    //   .then(response => response.json())
+    //   .then(window.alert(`${stockSymbol} has been saved to ${projectName}`));
   };
 
   const handleSaveExisting = () => {
-    let stockObject = {
-      project: project.id,
-      stock_sym: `${stockSymbol.toString().toUpperCase()} Casted ${Date()
-        .split(" ")
-        .slice(0, 5)
-        .join(" ")}`,
-      x_axis_array: xAxis.toString(),
-      proj_low_array: projectionLower.toString(),
-      proj_high_array: projection.toString(),
-      proj_array: projectionUpper.toString(),
-    };
-    fetch("http://localhost:3000/graphs/", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(stockObject),
-    })
-      .then(response => response.json())
-      .then(window.alert(`${stockSymbol} has been saved to ${project.name}`));
+    // let stockObject = {
+    //   project: project.id,
+    //   stock_sym: `${stockSymbol.toString().toUpperCase()} Casted ${Date()
+    //     .split(" ")
+    //     .slice(0, 5)
+    //     .join(" ")}`,
+    //   x_axis_array: xAxis.toString(),
+    //   proj_low_array: projectionLower.toString(),
+    //   proj_high_array: projection.toString(),
+    //   proj_array: projectionUpper.toString(),
+    // };
+    // fetch("http://localhost:3000/graphs/", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(stockObject),
+    // })
+    //   .then(response => response.json())
+    //   .then(window.alert(`${stockSymbol} has been saved to ${project.name}`));
   };
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:3000/projects/")
-      .then(response => response.json())
-      .then(setProjects);
-  }, []);
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:3000/projects/")
+  //     .then(response => response.json())
+  //     .then(setProjects);
+  // }, []);
 
-  const renderProjectChips = () => {
-    return projects.map(project => {
-      return (
-        <Chip
-          color='primary'
-          size='medium'
-          label={project.name}
-          deleteIcon={<DoneIcon />}
-          onClick={() => setProject(project)}
-          avatar={<Avatar>{project.id}</Avatar>}
-        />
-      );
-    });
-  };
+  // const renderProjectChips = () => {
+  //   return projects.map(project => {
+  //     return (
+  //       <Chip
+  //         color='primary'
+  //         size='medium'
+  //         label={project.name}
+  //         deleteIcon={<DoneIcon />}
+  //         onClick={() => (setProject(project))}
+  //         avatar={<Avatar>{project.id}</Avatar>}
+  //       />
+  //     );
+  //   });
+  // };
 
   return (
     <Page
@@ -365,7 +365,7 @@ const StockCast = () => {
                     <AccordionDetails className={classes.details}>
                       <div className={classes.column} />
                       <div className={classes.column}>
-                        {renderProjectChips()}
+                        {/* {renderProjectChips()} */}
                       </div>
                     </AccordionDetails>
                     <Divider />

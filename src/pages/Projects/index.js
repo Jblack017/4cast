@@ -1,16 +1,16 @@
-import AppBar from "@material-ui/core/AppBar";
-import Page from "material-ui-shell/lib/containers/Page";
-import React, { useState } from "react";
-import Tab from "@material-ui/core/Tab";
-import Tabs from "@material-ui/core/Tabs";
-import { useIntl } from "react-intl";
-import UserPlotly from "graphs/UserPlotly";
-import Tooltip from "@material-ui/core/Tooltip";
+// import AppBar from "@material-ui/core/AppBar";
+// import Page from "material-ui-shell/lib/containers/Page";
+import React from "react";
+// import Tab from "@material-ui/core/Tab";
+// import Tabs from "@material-ui/core/Tabs";
+// import { useIntl } from "react-intl";
+// import UserPlotly from "graphs/UserPlotly";
+// import Tooltip from "@material-ui/core/Tooltip";
 
 const Projects = () => {
-  const [tab, setTab] = useState(40);
-  const [userProjects, setUserProjects] = useState([]);
-  const intl = useIntl();
+  //   const [tab, setTab] = useState(40);
+  //   const [userProjects, setUserProjects] = useState([]);
+  //   const intl = useIntl();
 
   // useEffect(() => {
   //   fetch("http://127.0.0.1:3000/projects/")
@@ -25,31 +25,32 @@ const Projects = () => {
   //     });
   // }, [userProjects]);
 
-  const renderUserProjects = () => {
-    if (!userProjects.length) {
-      console.error("no user project length");
-    } else {
-      const foundProjects = userProjects.filter(project => project.id === tab);
-      return foundProjects.map(proj => {
-        proj.graphs.reverse();
-        return proj.graphs.map(graph => {
-          return (
-            <UserPlotly
-              xAxis={graph["x_axis_array"].split(",")}
-              projectionLower={graph["proj_low_array"].split(",")}
-              projection={graph["proj_array"].split(",")}
-              projectionUpper={graph["proj_high_array"].split(",")}
-              stockSym={graph["stock_sym"]}
-              globalQuote={{}}
-            />
-          );
-        });
-      });
-    }
-  };
+  // const renderUserProjects = () => {
+  //   if (!userProjects.length) {
+  //     console.error("no user project length");
+  //   } else {
+  //     const foundProjects = userProjects.filter(project => project.id === tab);
+  //     return foundProjects.map(proj => {
+  //       proj.graphs.reverse();
+  //       return proj.graphs.map(graph => {
+  //         return (
+  //           <UserPlotly
+  //             xAxis={graph["x_axis_array"].split(",")}
+  //             projectionLower={graph["proj_low_array"].split(",")}
+  //             projection={graph["proj_array"].split(",")}
+  //             projectionUpper={graph["proj_high_array"].split(",")}
+  //             stockSym={graph["stock_sym"]}
+  //             globalQuote={{}}
+  //           />
+  //         );
+  //       });
+  //     });
+  //   }
+  // };
 
   return (
-    <Page
+    <>
+      {/* <Page
       pageTitle={intl.formatMessage({
         id: "tabs_demo",
         defaultMessage: "Existing Cast Projects",
@@ -92,7 +93,8 @@ const Projects = () => {
           <div>"Create new Project"</div>
         )}
       </div>
-    </Page>
+    </Page> */}
+    </>
   );
 };
 export default Projects;

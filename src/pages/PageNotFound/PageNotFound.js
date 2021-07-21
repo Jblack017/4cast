@@ -1,23 +1,23 @@
-import Button from '@material-ui/core/Button'
-import Home from '@material-ui/icons/Home'
-import Page from 'material-ui-shell/lib/containers/Page'
-import Paper from '@material-ui/core/Paper'
-import React from 'react'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
-import { useIntl } from 'react-intl'
+import Button from "@material-ui/core/Button";
+import Home from "@material-ui/icons/Home";
+import Page from "material-ui-shell/lib/containers/Page";
+import Paper from "@material-ui/core/Paper";
+import React from "react";
+import Typography from "@material-ui/core/Typography";
+import { makeStyles } from "@material-ui/core/styles";
+import { useIntl } from "react-intl";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   icon: {
     width: 192,
     height: 192,
     color: theme.palette.secondary.main,
   },
   container: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    justifyContent: "center",
     height: `100%`,
   },
   paper: {
@@ -28,24 +28,27 @@ const useStyles = makeStyles((theme) => ({
   button: {
     marginTop: 20,
   },
-}))
+}));
 
 const PageNotFound = () => {
-  const intl = useIntl()
-  const classes = useStyles()
+  const intl = useIntl();
+  const classes = useStyles();
 
   return (
-    <Page pageTitle={intl.formatMessage({ id: 'page_not_found' })}>
+    <Page pageTitle={intl.formatMessage({ id: "page_not_found" })}>
       <Paper className={classes.paper}>
         <div className={classes.container}>
-          <Typography variant="h4">404</Typography>
-          <Typography variant="subtitle1">
-            {intl.formatMessage({ id: 'page_not_found' })}
+          <Typography variant='h4'>404</Typography>
+          <Typography variant='subtitle1'>
+            {intl.formatMessage({ id: "page_not_found" })}
+          </Typography>
+          <Typography variant='subtitle1'>
+            {"My account, Sign in, and Rails Backend are currently disabled"}
           </Typography>
           <Button
-            color="secondary"
-            aria-label="home"
-            href="/"
+            color='secondary'
+            aria-label='home'
+            href='/4cast'
             className={classes.button}
           >
             <Home />
@@ -53,7 +56,7 @@ const PageNotFound = () => {
         </div>
       </Paper>
     </Page>
-  )
-}
+  );
+};
 
-export default PageNotFound
+export default PageNotFound;

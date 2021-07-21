@@ -4,14 +4,14 @@ import {
   // ChatBubble,
   ChromeReaderMode,
   // Dashboard as DashboardIcon,
-  ExitToApp as ExitToAppIcon,
+  // ExitToApp as ExitToAppIcon,
   // FilterList,
   FormatTextdirectionRToL as RTLIcon,
   FormatTextdirectionLToR as LTRIcon,
   GetApp,
   InfoOutlined,
   Language as LanguageIcon,
-  Lock as LockIcon,
+  // Lock as LockIcon,
   MenuOpen as MenuOpenIcon,
   // QuestionAnswer,
   SettingsApplications as SettingsIcon,
@@ -71,21 +71,21 @@ const getMenuItems = props => {
         }),
         leftIcon: <AccountBoxIcon />,
       },
-      {
-        value: "/signin",
-        onClick: isAuthorised ? () => {} : () => {},
-        visible: true,
-        primaryText: isAuthorised
-          ? intl.formatMessage({ id: "sign_out" })
-          : intl.formatMessage({ id: "sign_in" }),
-        leftIcon: isAuthorised ? <ExitToAppIcon /> : <LockIcon />,
-      },
+      // {
+      //   value: "/signin",
+      //   onClick: isAuthorised ? () => {} : () => {},
+      //   visible: true,
+      //   primaryText: isAuthorised
+      //     ? intl.formatMessage({ id: "sign_out" })
+      //     : intl.formatMessage({ id: "sign_in" }),
+      //   leftIcon: isAuthorised ? <ExitToAppIcon /> : <LockIcon />,
+      // },
     ];
   }
   return [
     {
       value: "/4cast/projects",
-      visible: isAuthorised,
+      visible: false,
       primaryText: intl.formatMessage({
         id: "projects",
         defaultMessage: "4Casts",
