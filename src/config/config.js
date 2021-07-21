@@ -5,9 +5,6 @@ import themes from "./themes";
 import parseLanguages from "base-shell/lib/utils/locale";
 
 const config = {
-  auth: {
-    signInURL: "/signin",
-  },
   routes,
   locale: {
     locales,

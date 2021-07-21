@@ -14,7 +14,6 @@ import Accordion from "@material-ui/core/Accordion";
 import AccordionDetails from "@material-ui/core/AccordionDetails";
 import AccordionSummary from "@material-ui/core/AccordionSummary";
 import AccordionActions from "@material-ui/core/AccordionActions";
-import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import Chip from "@material-ui/core/Chip";
 import Divider from "@material-ui/core/Divider";
@@ -28,7 +27,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
   },
   heading: {
-    fontSize: theme.typography.pxToRem(15),
+    fontSize: theme.typography.pxToRem(12),
     fontWeight: theme.typography.fontWeightRegular,
   },
   paper: {
@@ -70,8 +69,18 @@ const useStyles = makeStyles(theme => ({
     },
   },
   scrollbar: { height: "70%", width: "70%", display: "flex", flex: 1 },
-  textField: { margin: theme.spacing(3) },
-  button: { margin: theme.spacing(3) },
+  textField: { margin: theme.spacing(2) },
+  button: { margin: theme.spacing(2) },
+  saveProp: {
+    margin: theme.spacing(2),
+    flexGrow: 1,
+  },
+  grid: { width: "100%" },
+  gridItem: { flex: 1, flexGrow: 1 },
+  saveText: {
+    fontSize: theme.typography.pxToRem(12),
+    color: theme.palette.text.secondary,
+  },
 }));
 
 const StockCast = () => {
@@ -145,7 +154,6 @@ const StockCast = () => {
 
   const parseForecast = forecast => {
     csv.parse(forecast.data, (err, data) => {
-      console.log(data);
       if (!err) {
         let xAxisValues = [];
         let projLower = [];
@@ -289,7 +297,7 @@ const StockCast = () => {
             </>
           ) : (
             <>
-              <Grid item xs={2} sm={2}>
+              <Grid item className={classes.gridItem}>
                 <Button
                   className={classes.button}
                   size='large'
@@ -300,20 +308,16 @@ const StockCast = () => {
                   Reset
                 </Button>
               </Grid>
-              <Grid item xs={4} sm={4}>
-                <Paper className={classes.root}>
+              <Grid item className={classes.gridItem}>
+                <Paper className={classes.saveProp}>
                   <Accordion defaultExpanded={false}>
                     <AccordionSummary
+                      className={classes.saveText}
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls='panel1c-content'
                       id='panel1c-header'
                     >
-                      <div className={classes.column}>
-                        <Typography className={classes.heading}>
-                          Save to New
-                        </Typography>
-                      </div>
-                      <div className={classes.column}></div>
+                      Save to New
                     </AccordionSummary>
                     <AccordionDetails className={classes.details}>
                       <div className={classes.column} />
@@ -347,20 +351,16 @@ const StockCast = () => {
                   </Accordion>
                 </Paper>
               </Grid>
-              <Grid item xs={4} sm={4}>
-                <Paper className={classes.root}>
+              <Grid item className={classes.gridItem}>
+                <Paper className={classes.saveProp}>
                   <Accordion defaultExpanded={false}>
                     <AccordionSummary
+                      className={classes.saveText}
                       expandIcon={<ExpandMoreIcon />}
                       aria-controls='panel1c-content'
                       id='panel1c-header'
                     >
-                      <div className={classes.column}>
-                        <Typography className={classes.heading}>
-                          Save to Existing
-                        </Typography>
-                      </div>
-                      <div className={classes.column}></div>
+                      Save to Existing
                     </AccordionSummary>
                     <AccordionDetails className={classes.details}>
                       <div className={classes.column} />

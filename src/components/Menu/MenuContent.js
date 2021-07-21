@@ -2,7 +2,6 @@ import React from "react";
 import Scrollbar from "material-ui-shell/lib/components/Scrollbar/Scrollbar";
 import SelectableMenuList from "material-ui-shell/lib/containers/SelectableMenuList";
 import { useAddToHomeScreen } from "base-shell/lib/providers/AddToHomeScreen";
-import { useAuth } from "base-shell/lib/providers/Auth";
 import { useConfig } from "base-shell/lib/providers/Config";
 import { useHistory, useRouteMatch } from "react-router-dom";
 import { useIntl } from "react-intl";
@@ -15,7 +14,6 @@ const Menu = props => {
   const intl = useIntl();
   const history = useHistory();
   const match = useRouteMatch();
-  const auth = useAuth();
   const menuContext = useMenu();
   const a2HSContext = useAddToHomeScreen();
   const { toggleThis, isMiniMode, isMiniSwitchVisibility } = menuContext || {};
@@ -31,7 +29,6 @@ const Menu = props => {
     themeContext,
     appConfig,
     a2HSContext,
-    auth,
     ...props,
   }).filter(item => {
     return item.visible !== false;

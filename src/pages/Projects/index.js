@@ -1,6 +1,6 @@
 import AppBar from "@material-ui/core/AppBar";
 import Page from "material-ui-shell/lib/containers/Page";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Tab from "@material-ui/core/Tab";
 import Tabs from "@material-ui/core/Tabs";
 import { useIntl } from "react-intl";
@@ -12,18 +12,18 @@ const Projects = () => {
   const [userProjects, setUserProjects] = useState([]);
   const intl = useIntl();
 
-  useEffect(() => {
-    fetch("http://127.0.0.1:3000/projects/")
-      .then(response => response.json())
-      .then(userProj => setUserProjects(userProj))
-      .then(() => {
-        if (!userProjects.length) {
-          console.error("no user project length");
-        } else {
-          setTab(userProjects[0]["id"]);
-        }
-      });
-  }, [userProjects]);
+  // useEffect(() => {
+  //   fetch("http://127.0.0.1:3000/projects/")
+  //     .then(response => response.json())
+  //     .then(userProj => setUserProjects(userProj))
+  //     .then(() => {
+  //       if (!userProjects.length) {
+  //         console.error("no user project length");
+  //       } else {
+  //         setTab(userProjects[0]["id"]);
+  //       }
+  //     });
+  // }, [userProjects]);
 
   const renderUserProjects = () => {
     if (!userProjects.length) {
