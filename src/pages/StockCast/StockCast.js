@@ -303,7 +303,10 @@ const StockCast = () => {
                   size='large'
                   variant='contained'
                   color='secondary'
-                  onClick={() => window.location.reload()}
+                  onClick={() => {
+                    setXAxis(null);
+                    setLoadingMessage("Let's Try Another One!");
+                  }}
                 >
                   Reset
                 </Button>
