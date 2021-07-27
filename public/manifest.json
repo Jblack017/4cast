@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "4Cast",
+  "name": "A MicroSite Designed to Support TimeSeries Data Analysis",
   "icons": [
     {
       "src": "favicon.ico",
